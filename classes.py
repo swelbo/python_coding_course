@@ -6,8 +6,12 @@ class x(IntEnum): # Action here could be anything. This class allows us to add o
     this = 1
     out = 2
 
-s = int(input("Please guess a number between 1 and 10 "))
+s = int(input("Please guess a number between 1 and 10 1"))
 
 y = x(s)
 
 print(y.name)
+
+# yeah baby 
+
+

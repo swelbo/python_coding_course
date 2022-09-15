@@ -33,7 +33,20 @@ class Action(IntEnum): # Action here could be anything.
     Rock = 0 
     Paper = 1
     Scissors = 2
+    Lizard = 3
+    Spock = 4
 
+# this is a dictionary - it contains the selection variable plus two variables that are linked to the 
+# selection variable - in this case it is the the two variables that defeat the input variable 
+# dictionary that outlines the victories (values) given a certain choice (key)  
+# rember a dictionary consists of key  followed by :  followed by value (key:value
+victories = {
+    Action.Scissors: [Action.Lizard, Action.Paper],
+    Action.Paper: [Action.Spock, Action.Rock],
+    Action.Rock: [Action.Lizard, Action.Scissors],
+    Action.Lizard: [Action.Spock, Action.Paper],
+    Action.Spock: [Action.Scissors, Action.Rock]
+}
 # this function gets the users selection. It first asks for choices. Choices can be added or removed by editing the
 # class Action 
 def get_user_selection():
@@ -50,7 +63,7 @@ def get_computer_selection():
     action = Action(selection)
     return action
 
-
+''' old
 # function to determine the winner
 def determine_winner(user_action, computer_action):
     if user_action == computer_action:
@@ -71,7 +84,25 @@ def determine_winner(user_action, computer_action):
         else:
             print("Rock smashes Scissors! You lose.")
 
+'''
 
+def determine_winner(user_action, computer_action):
+    defeats = victories[user_action]
+    if user_action == computer_action:
+        print(f"Both players selected {user_action.name}. It's a tie!")
+    elif computer_action in defeats:
+        print(f"{user_action.name} beats {computer_action.name}! You win!")
+    else:
+        print(f"{computer_action.name} beats {user_action.name}! You lose.")
+
+
+
+# The while loop is the brining all the functions together
+# inside the for loop is an exception statement that ensures the user only chooses 0-2 as their options
+# it runs get_user_selection, if that fails due to user error it prints and asks again
+# It then gets the computer action using get_computer_selection()
+# it detrmines winner using the outcome of the two input functions. 
+# then asks if we want to play again :)
 while True:
     try:
         user_action = get_user_selection()
@@ -85,4 +116,5 @@ while True:
 
     play_again = input("Play again? (y/n): ")
     if play_again.lower() != "y":
+        print("Thank you for playing :)")
         break
