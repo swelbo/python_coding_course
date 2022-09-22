@@ -1,7 +1,7 @@
 file = open("books.txt", "r") 
 
 #your code goes here 
-f = file.readlines()
+f = file.readlines()    
 for line in f:
     letter = line[0]
     num = len(line.strip())
