@@ -29,19 +29,41 @@ scissors = '''
 
 #
 import random as rd
+import time
 
 # User input
-user = int(input("What do you choose? Type 0 for Rock, 1 for Paper or 2 for Scissors.? "))
+user = int(input("What do you choose? Type 0 for Rock, 1 for Paper or 2 for Scissors.?\n"))
 computer = rd.randint(0,2)
 
+# game images list
+game_images = [rock, paper, scissors]
 
-if user == 1 and computer == 0:
-    print("its a tie")
-elif user == 1 and computer == 0:
-    print("user wins")
-elif user == 0 and computer == 2:
-    print("user wins")
-elif user == 2 and computer == 1:
-    print("user wins")
+# check the entry is between 0-2
+# change at somepoint to try/except
+if user >= 3 or -0:
+    print("Invalid entry, please try again")
 else:
-    print("computer wins")
+
+    # computer image 
+    print("The computer chose:")
+    print(game_images[user])
+
+    # sleep for suspense
+    time.sleep(1)
+    
+    # user image
+    print("you chose:")
+    print(game_images[computer])
+
+    # result 
+    time.sleep(1)
+    if user == computer:
+        print("Ah, it is a tie")
+    elif user == 1 and computer == 0:
+        print("Nice! You win :)")
+    elif user == 0 and computer == 2:
+        print("Nice! You win :)")
+    elif user == 2 and computer == 1:
+        print("Nice! You win :)")
+    else:
+        print("Ah, shucks. The computer wins this time")
