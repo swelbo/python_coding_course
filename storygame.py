@@ -36,24 +36,32 @@ print("Your mission is to find the treasure.")
 #Write your code below this line 👇
 
 # First user input
-one = input('You\'re at a crossroad. Where do you want to go? Type "left" or "right" ')
+one = input('You\'re at a crossroad. Where do you want to go? Type "left" or "right" ').lower()
 
 # if statement for first qurestion
 if one == "left":
-    print("You fell into a hole. Game Over")
-elif one == "right":
-    two = input("You've come to a lake. There is an island in the middle of the lake. Type 'wait' to wait for a boat. Type 'swim' to swim across. ")
+    two = input("You've come to a lake. There is an island in the middle of the lake. Type 'wait' to wait for a boat. Type 'swim' to swim across.\n").lower()
     
     # Nested if statement for question two
-    if two == "swim":
-        print("You get attacked by an angry trout. Game Over.")
-    elif two == "wait":
-        three = input("You arrive at the island unharmed. There is a house with 3 doors. One red, one yellow and one blue. Which colour do you choose? ")
+    if two == "wait":
+        three = input("You arrive at the island unharmed. There is a house with 3 doors. One red, one yellow and one blue. Which colour do you choose? \n").lower()
         
         # Nested if statement for question three
         if three == "red":
             print("It's a room full of fire. Game Over.")
         elif three == "yellow":
             print("You enter a room of beasts. Game Over.")
+        elif three != "red" or "yellow" "blue":
+            print("Wrong input baby - GAME IS OVER FOR YOU!")
         else:
-            print("OMG you made it! Gratz") # Winner winner 
+            print("OMG you made it! Gratz") # Winner winner
+
+    elif two == "swim":
+        print("You get attacked by an angry trout. Game Over.")
+    else:
+        print("Wrong input baby - GAME IS OVER FOR YOU!")
+
+elif one == "right":
+    print("You fell into a hole. Game Over")
+else:
+    print("Wrong input baby - GAME IS OVER FOR YOU!")
