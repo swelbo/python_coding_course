@@ -1,7 +1,7 @@
 ###
 # Reborgs World only - some functions not defined! # 
 ###
-
+'''
 def turn_right():
     turn_left()
     turn_left()
@@ -30,3 +30,4 @@ while at_goal() == False:
 # WARNING: Do not change this comment.
 # Library Code is below.
 ################################################################
+'''
