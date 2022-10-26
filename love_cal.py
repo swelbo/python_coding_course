@@ -12,7 +12,7 @@ def count(name, letter):
     x = x.count(letter)
     return(x)
 
-# combine names
+# combine names (they are strings)
 names = name1+name2
 
 # Loop through True 
