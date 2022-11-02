@@ -5,32 +5,27 @@ text = input("Type your message:\n").lower()
 shift = int(input("Type the shift number (1-50):\n"))
 
 
-#TODO-1: Combine the encrypt() and decrypt() functions into a single function called caesar(). 
-
-# link the + and the - to the direction variable somehow? 
-
-if direction == "encode":
-    symbol = "+"
-elif direction == "decode":
-    symbol = "-"
+#Combine the encrypt() and decrypt() functions into a single function called caesar(). 
 
 def ceaser(text, shift):
     # shift each letter of the 'text' forwards in the alphabet by the shift amount and print the encrypted text.
-    
-    #print(symbol)
-
     shifted_text = []
     for character in text:
         position = ca.alphabet.index(character)
-        new_position = position symbol shift # symbol here doesn't work as it is a syntax error 
+        if direction == "encode":
+            new_position = position + shift
+        else:
+            new_position = position - shift
         shifted_text += ca.alphabet[new_position]
 
+    print(f"The {direction}d text is {''.join(shifted_text)}")
+
+#Call the caesar() function, passing over the 'text', 'shift' and 'direction' values.
 ceaser(text, shift)
 
-
-
-
 '''
+### OLD VERSION
+
 # defining function called encrypt
 def encrypt(text, shift):
     # shift each letter of the 'text' forwards in the alphabet by the shift amount and print the encrypted text.  
@@ -58,13 +53,5 @@ if direction == "encode":
     encrypt(text, shift)
 else:
     decrypt(text, shift)
-
-
-#TODO-2: Call the caesar() function, passing over the 'text', 'shift' and 'direction' values.
-
-
-
-
-
 
 '''
