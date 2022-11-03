@@ -1,27 +1,42 @@
 import ceaser_alphabet as ca
+import art
 
-direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
-text = input("Type your message:\n").lower()
-shift = int(input("Type the shift number (1-50):\n"))
-
-
-#Combine the encrypt() and decrypt() functions into a single function called caesar(). 
-
-def ceaser(text, shift):
+def ceaser(text, shift, direction):
     # shift each letter of the 'text' forwards in the alphabet by the shift amount and print the encrypted text.
-    shifted_text = []
+    end_text = []
+    
     for character in text:
-        position = ca.alphabet.index(character)
-        if direction == "encode":
-            new_position = position + shift
+        if character not in ca.alphabet:
+            end_text.append(character)
         else:
-            new_position = position - shift
-        shifted_text += ca.alphabet[new_position]
+            position = ca.alphabet.index(character)
+            if direction == "encode":
+                new_position = position + shift
+            else:
+                new_position = position - shift
+            end_text += ca.alphabet[new_position]
 
-    print(f"The {direction}d text is {''.join(shifted_text)}")
+    print(f"The {direction}d text is {''.join(end_text)}")
 
-#Call the caesar() function, passing over the 'text', 'shift' and 'direction' values.
-ceaser(text, shift)
+# Print the logo 
+print(art.logo)
+
+restart = "yes"
+while restart == "yes": 
+
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number (1-50):\n"))
+
+    #TODO-2: What if the user enters a shift that is greater than the number of letters in the alphabet?
+    #Try running the program and entering a shift number of 45.
+    #Add some code so that the program continues to work even if the user enters a shift number greater than 26. 
+    #Hint: Think about how you can use the modulus (%).
+    ceaser(text, shift, direction)
+    
+    restart = input("play again? ")
+
+print("Goodbye")
 
 '''
 ### OLD VERSION
