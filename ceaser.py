@@ -1,42 +1,48 @@
 import ceaser_alphabet as ca
 import art
 
-def ceaser(text, shift, direction):
+# function dor encoding and decoding
+def ceaser(start_text, shift_amount, cipher_direction):
     # shift each letter of the 'text' forwards in the alphabet by the shift amount and print the encrypted text.
     end_text = []
     
-    for character in text:
+    for character in start_text:
         if character not in ca.alphabet:
-            end_text.append(character)
+            end_text += character
         else:
             position = ca.alphabet.index(character)
+
             if direction == "encode":
-                new_position = position + shift
+                new_position = position + shift_amount
             else:
-                new_position = position - shift
+                new_position = position - shift_amount
+
             end_text += ca.alphabet[new_position]
 
-    print(f"The {direction}d text is {''.join(end_text)}")
+    print(f"The {cipher_direction}d text is {''.join(end_text)}")
 
 # Print the logo 
 print(art.logo)
 
+# global restart program variable
 restart = "yes"
+
+# loop until user no longer wants to use program
 while restart == "yes": 
 
     direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
     text = input("Type your message:\n").lower()
-    shift = int(input("Type the shift number (1-50):\n"))
-
-    #TODO-2: What if the user enters a shift that is greater than the number of letters in the alphabet?
-    #Try running the program and entering a shift number of 45.
-    #Add some code so that the program continues to work even if the user enters a shift number greater than 26. 
-    #Hint: Think about how you can use the modulus (%).
-    ceaser(text, shift, direction)
+    shift = int(input("Type the shift number: "))
     
-    restart = input("play again? ")
+    # allows user to enter shift number higher than alphabet length
+    shift = shift % 26
 
-print("Goodbye")
+    # call function
+    ceaser(start_text = text, shift_amount = shift, cipher_direction = direction)
+    
+    restart = input("Would you like to encode/decode again? ").lower()
+
+print("OK, goodbye")
 
 '''
 ### OLD VERSION
