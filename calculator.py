@@ -35,19 +35,23 @@ num1 = float(input("What is the first number? "))
 for symbol in operations:
     print(symbol)
 
-# ask to choose operation
-operation_symbol = input("Pick an operation from the list above ")
+continue_calculation = True
+while continue_calculation:
+    operation_symbol = input("Pick and operation ")
+    num2 = float(input("What is the next number? "))
+     
+    answer = operations[operation_symbol](n1=num1, n2=num2)
+    
+    print(f"{num1} {operation_symbol} {num2} = {answer}")
+    
+    continue_calculation = input(f"Type y to continue calculating with {answer} or type n to exit ")
 
-# ask for second number 
-num2 = float(input("What is the second number? "))
-
-# calculate answer
-answer = operations[operation_symbol](n1=num1, n2=num2)
-
-# print to user 
-print(f"{num1} {operation_symbol} {num2} = {answer}")
+    if continue_calculation == "y":
+        num1 = answer
+    else:
+        continue_calculation = False
+    
 
 
 
 
-####
