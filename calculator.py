@@ -1,9 +1,7 @@
 #### calculator.py
 
 from art import logo3
-
-# logo
-print(logo3)
+import replit as re 
 
 # addition 
 def add(n1, n2):
@@ -28,30 +26,37 @@ operations = {
     "/":divide
 }
 
-# ask for first number
-num1 = float(input("What is the first number? "))
-
-# for loop to print out all the operations
-for symbol in operations:
-    print(symbol)
-
-continue_calculation = True
-while continue_calculation:
-    operation_symbol = input("Pick and operation ")
-    num2 = float(input("What is the next number? "))
-     
-    answer = operations[operation_symbol](n1=num1, n2=num2)
+# calculator function
+def calculator():
     
-    print(f"{num1} {operation_symbol} {num2} = {answer}")
-    
-    continue_calculation = input(f"Type y to continue calculating with {answer} or type n to exit ")
+    print(logo3)
 
-    if continue_calculation == "y":
-        num1 = answer
-    else:
-        continue_calculation = False
-    
+    # ask for first number
+    num1 = float(input("What is the first number? "))
 
+    # for loop to print out all the operations
+    for symbol in operations:
+        print(symbol)
 
+    continue_calculation = True
+    while continue_calculation:
+        operation_symbol = input("Pick and operation ")
+        num2 = float(input("What is the next number? "))
+        
+        answer = operations[operation_symbol](n1=num1, n2=num2)
+        
+        print(f"{num1} {operation_symbol} {num2} = {answer}")
+        
+        continue_calculation = input(f"Type y to continue calculating with {answer} or type n to start are new calculation ")
+
+        if continue_calculation == "y":
+            num1 = answer
+        else:
+            continue_calculation = False
+            re.clear()
+            calculator() # recursion calling function
+
+# call calculator function to begin program
+calculator()
 
 
