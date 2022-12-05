@@ -34,25 +34,9 @@
 # import libraries
 import random 
 import art
+import replit 
 
-# print the logo
-#print(art.logo4)
 
-def draw_card():
-    cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-    card_index = random.randint(0,12)
-    return cards[card_index]
-
-# generate a random card for each player 
-user_card_1 = draw_card()
-user_card_2 = draw_card()
-
-# generate starting cards for the computer
-cpu_card_1 = draw_card()
-
-# card scores - Ace, 2, 3 etc ... 
-# assumption - cards come from this list - all have equal chance of occuring
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 # Dictionary of card names so we can display the names
 # TODO nested dictionary NAME:{Value:Index}
@@ -72,49 +56,88 @@ card_dict = {
     "king":10,
 }
 
-# Show cards 
-print(f"Your cards are {user_card_1} and {user_card_2}")
+# define a draw cards function
+def draw_card():
+    cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+    card_index = random.randint(0,12)
+    return cards[card_index]
 
-# print score
-user_score = user_card_1 + user_card_2
+def main():
+    # print the logo
+    print(art.logo4)
+    # generate a random card for each player
+    users_cards = []
+    users_cards.append(draw_card())
 
-# show cards 
-print(f"The computers first card is {cpu_card_1}")
-cpu_score = cpu_card_1
+    cpu_cards = []
+    cpu_cards.append(draw_card())
 
-# print scores
-print(f"Your current score is {user_score}")
-print(f"The computers current score is {cpu_score}")
-#
+    # Get the computers cards
+    cpu_score = 0
+    cpu_bust = False
+    while cpu_score < 18:
+        cpu_cards.append(draw_card())
+        cpu_score = sum(cpu_cards)
+        if cpu_score > 21:
+            cpu_bust = "bust"
 
-draw_again = True
-while user_score < 21:
-    x = input("Would you like to draw another card (y/n)? ")
-    if x == "y":
-        new_card = draw_card()
-        print(f"Your new card is {new_card}\n")
-        user_score += new_card
-        print(f"Your score is now {user_score}")
-    elif x == "n":
-        draw_again = False
+    users_score = 0
+    draw_again = True
+    while draw_again: 
+        users_cards.append(draw_card())
+        users_score = sum(users_cards)
+        
+        print(f"Your cards are {users_cards}, your total score is {users_score}")
+        print(f"Computer's first card is [{cpu_cards[0]}]")
+        
+        if sum(users_cards) <= 21:
+            x = input("Draw again? ")
+            if x == "y":
+                draw_again = True
+            else:
+                draw_again = False
 
-if user_score > 21:
-    print("bust")
+                if users_score == cpu_score:
+                    print("It is a draw")
+                elif cpu_score > 21:
+                    print("")
+                    print("Computer went bust, you win! ")
+                elif users_score > cpu_score:
+                    print("")
+                    print("You win!")
+                else: 
+                    print("Computer wins!")
 
-# while CPU score is less than 18 keep drawing cards 
-cpu_draw = True
-while cpu_score < 19:
-    new_card = draw_card()
-    cpu_score += new_card
+                print(f" - Your final hand was {users_cards} and the computers was {cpu_cards}")
+                print(f" - Your score was {users_score} and the computers was {cpu_score}")
 
-print(f"CPU total is {cpu_score}")
+        else:
+            draw_again = False
+            print("You went bust! Computer wins")
 
-# print
+play_again = True
+while play_again:
+    main()
+    if input("Play again? ") == "y":
+        replit.clear()
+        play_again = True
+    else:
+        print("No problem! Here are your game stats: ")
+        play_again = False
 
-# draw = True
-# while draw:
-#     x = input("Would you like to pick another card (y/n)? ")
-#     if x == "n":
-#         draw = False
-#     else:
-#         draw_card()
+
+    # # Print final results 
+    # print(f" - Your final hand was {users_cards} and the computers was {cpu_cards}")
+    # print(f" - Your score was {users_score} and the computers was {cpu_score}")
+
+    # # decdide on the winner (or draw)
+    # if user_bust == "bust":
+    #     print("You went bust! Computer wins!")
+    # elif cpu_bust == True and user_bust == True:
+    #     print("You both went bust! Its a draw!")
+    # elif users_score == cpu_score:
+    #     print("It is a draw")
+    # elif users_score > cpu_score:
+    #     print("You win!")
+    # else:
+    #     print("Computer wins!")
