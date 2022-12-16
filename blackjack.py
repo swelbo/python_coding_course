@@ -24,19 +24,10 @@
 #Then try out the completed Blackjack project here: 
 #   http://blackjack-final.appbrewery.repl.run
 
-#Hint 2: Read this breakdown of program requirements: 
-#   http://listmoz.com/view/6h34DJpvJBFVRlZfJvxF
-#Then try to create your own flowchart for the program.
-
-#Hint 3: Download and read this flow chart I've created: 
-#   https://drive.google.com/uc?export=download&id=1rDkiHCrhaf9eX7u7yjM1qwSuyEk-rPnt
-
 # import libraries
 import random 
 import art
 import replit 
-
-
 
 # Dictionary of card names so we can display the names
 # TODO nested dictionary NAME:{Value:Index}
@@ -62,9 +53,31 @@ def draw_card():
     card_index = random.randint(0,12)
     return cards[card_index]
 
+def sum_scores(cards):
+    if sum(cards) == 21 and len(cards) == 2:
+        return 0 
+    if 11 in cards and sum(cards) > 21:
+        cards.remove(11)
+        cards.append(1)
+    return sum(cards)
+
+def compare_scores(users_score, cpu_score):
+    if users_score == cpu_score:
+        print("It is a draw")
+    elif cpu_score == 0:
+        print("You lose! Computer had a blackjack!")
+    elif cpu_score > 21:
+        print("Computer went bust, you win! ")
+    elif users_score == 0:
+        print("You got a blackjack! You win!")
+    elif users_score > cpu_score:
+        print("You win!")
+    else: 
+        print("Computer wins!")
+
 def main():
     # print the logo
-    print(art.logo4)
+    #print(art.logo4)
     # generate a random card for each player
     users_cards = []
     users_cards.append(draw_card())
@@ -74,18 +87,15 @@ def main():
 
     # Get the computers cards
     cpu_score = 0
-    cpu_bust = False
     while cpu_score < 18:
         cpu_cards.append(draw_card())
-        cpu_score = sum(cpu_cards)
-        if cpu_score > 21:
-            cpu_bust = "bust"
+        cpu_score = sum_scores(cpu_cards)
 
     users_score = 0
     draw_again = True
     while draw_again: 
         users_cards.append(draw_card())
-        users_score = sum(users_cards)
+        users_score = sum_scores(users_cards)
         
         print(f"Your cards are {users_cards}, your total score is {users_score}")
         print(f"Computer's first card is [{cpu_cards[0]}]")
@@ -97,23 +107,14 @@ def main():
             else:
                 draw_again = False
 
-                if users_score == cpu_score:
-                    print("It is a draw")
-                elif cpu_score > 21:
-                    print("")
-                    print("Computer went bust, you win! ")
-                elif users_score > cpu_score:
-                    print("")
-                    print("You win!")
-                else: 
-                    print("Computer wins!")
+                compare_scores(users_score, cpu_score)
 
                 print(f" - Your final hand was {users_cards} and the computers was {cpu_cards}")
                 print(f" - Your score was {users_score} and the computers was {cpu_score}")
 
         else:
             draw_again = False
-            print("You went bust! Computer wins")
+            print(f"You went bust! Computer wins with a hand of {cpu_cards[0:2]} and a score of {sum(cpu_cards[0:2])}")
 
 play_again = True
 while play_again:
@@ -122,22 +123,5 @@ while play_again:
         replit.clear()
         play_again = True
     else:
-        print("No problem! Here are your game stats: ")
+        print("No problem! Here are your game stats: The computer won X times, and you won X times. That is a win percentage of X ")
         play_again = False
-
-
-    # # Print final results 
-    # print(f" - Your final hand was {users_cards} and the computers was {cpu_cards}")
-    # print(f" - Your score was {users_score} and the computers was {cpu_score}")
-
-    # # decdide on the winner (or draw)
-    # if user_bust == "bust":
-    #     print("You went bust! Computer wins!")
-    # elif cpu_bust == True and user_bust == True:
-    #     print("You both went bust! Its a draw!")
-    # elif users_score == cpu_score:
-    #     print("It is a draw")
-    # elif users_score > cpu_score:
-    #     print("You win!")
-    # else:
-    #     print("Computer wins!")
