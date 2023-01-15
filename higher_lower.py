@@ -26,7 +26,7 @@ def print_higher_lower(first_person, second_person):
     print("Who has more followers? ")
     person_info(first_person)
     print("")
-    print("VS")
+    print(logo7)
     print("")
     person_info(second_person)
 
@@ -49,6 +49,7 @@ def users_guess():
 
 keep_playing = "y"
 while keep_playing == "y":
+    rp.clear()
     # Get the first two people
     first_person = select_random_person(data)
 
@@ -62,8 +63,6 @@ while keep_playing == "y":
 
         # check who is the winner of the two
         winner = get_winner(first_person, second_person)
-
-        print(winner["name"])
 
         # Print to the user who has been selected 
         print_higher_lower(first_person, second_person)
