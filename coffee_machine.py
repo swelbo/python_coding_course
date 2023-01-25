@@ -1,10 +1,10 @@
-from coffee_machine_data import MENU
+from coffee_machine_data import MENU, resources
 from time import sleep
 
 # data and globals
 data = MENU
 coin = {"dollar":1.0, "quarter":0.25, "dime":0.10, "nickle":0.05, "pennies":0.01}
-starting_stock = {"water":300, "milk":200, "coffee":100, "money":0}
+starting_stock = resources
 current_stock = {"ingredients":{"water":300, "milk":200, "coffee":100}, "cost":0}
 
 # Get the users secletion 
