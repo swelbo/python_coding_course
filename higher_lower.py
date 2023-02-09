@@ -16,9 +16,7 @@ def select_random_person(data):
     return data[random_int1]
 
 def person_info(person):
-    print(f"{person['name']}")
-    print(f"{person['description']}")
-    print(f"{person['country']}")
+    print(f"{person['name']} - {person['description']} - {person['country']}")
 
 # Print the two randomly selected people
 def print_higher_lower(first_person, second_person):
@@ -47,6 +45,7 @@ def users_guess():
         guess = second_person
     return guess
 
+
 keep_playing = "y"
 while keep_playing == "y":
     rp.clear()
@@ -54,6 +53,7 @@ while keep_playing == "y":
     first_person = select_random_person(data)
 
     roll_over = True
+    score = 0
     while roll_over == True:
         second_person = select_random_person(data)
 
@@ -72,13 +72,16 @@ while keep_playing == "y":
 
         # Print the winner 
         if guess["name"] == "Instagram":
-            print("you reached the highest count in the db, well done")
+            print(f"Hey! You reached the highest count in the db, well done Your final score was {score}")
             roll_over = False
         elif guess == winner:
+            score += 1
             print("Well done! ")
+            print(f"Your score is {score}")
             first_person = winner
         else:
             print("You lose")
+            print(f"Your final score was {score}")
             roll_over = False
 
     keep_playing = input("play again y/n? ").lower()

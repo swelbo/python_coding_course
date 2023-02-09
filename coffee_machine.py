@@ -14,14 +14,15 @@ def get_selection():
     return selection
 
 # check stock to see if there is enough stock based on the selection 
-def sufficient_resources_check():
-    '''Check machine stock'''
+def sufficient_resources_check(selection_resources):
+    '''Check machine stock and returns true or false depending on resources'''
     for item in selection_resources["ingredients"]:
         if selection_resources["ingredients"][item] <= current_stock["ingredients"][item]:
             print(f"{item.title()} is in topped up, you're all good")
         else:
             print(f"Argh, no {item} in stock, here is your refund")
-            break
+            return False
+    return True
 
 def money_handling():
     '''Money handling'''
@@ -53,16 +54,21 @@ def make_the_coffee():
     print(f"Here is you {selection_name.title()}. Enjoy!")
 
 # step 1
-selection_name = get_selection()
-if selection_name == "off":
-    print("Powering down")
-elif selection_name == "report":
-    print(current_stock)
-else:
-    # step 2
-    selection_resources = data[selection_name]
-    sufficient_resources_check()
-    # step 3 
-    money_handling()
-    # step 4
-    make_the_coffee()
+machine_on = True
+while machine_on == True:
+    selection_name = get_selection()
+    if selection_name == "off":
+        print("Powering down")
+        machine_on = False
+    elif selection_name == "report":
+        print(current_stock)
+    else:
+        # step 2
+        selection_resources = data[selection_name]
+        if sufficient_resources_check(selection_resources):
+            # step 3 
+            money_handling()
+            # step 4
+            make_the_coffee()
+        else: 
+            print("Not enough resources! Please top up the machine")
