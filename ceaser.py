@@ -22,7 +22,7 @@ def ceaser(start_text, shift_amount, cipher_direction):
     print(f"The {cipher_direction}d text is {''.join(end_text)}")
 
 # Print the logo 
-print(art.logo)
+print(art.logo1)
 
 # global restart program variable
 restart = "yes"
