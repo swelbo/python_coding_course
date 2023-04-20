@@ -1,4 +1,5 @@
-from turtle import Turtle, Screen
+from turtle import Turtle, Screen, colormode
+colormode(255)
 import random
 
 # turtle object
@@ -43,21 +44,61 @@ timmy.color("red")
 #     timmy.forward(100)
 #     timmy.right(72)
 
-cols = ["chocolate", "lime", "red", "black", "orange", "blue", "gold", "medium violet red", "yellow green", "dark cyan"]
+def generate_colours():
+    r = random.randint(0,255)
+    g = random.randint(0,255)
+    b = random.randint(0,255)
+    return (r,g,b)
 
-def random_walk(distance):
-    timmy.pensize(5)
-    timmy.speed(10)
-    timmy.color(random.choice(cols))
-    # movement = random.randint(10,50)
-    angles = [90, 180, 270, 360]
-    heading = random.choice(angles)
-    timmy.setheading(heading)
-    timmy.hideturtle()
-    timmy.forward(distance)
+# cols = ["chocolate", "lime", "red", "black", "orange", "blue", "gold", "medium violet red", "yellow green", "dark cyan"]
 
-for i in range(200):
-    random_walk(20)
+# #### random walk 
+# def random_walk(distance):
+#     timmy.pensize(5)
+#     timmy.speed(50)
+#     timmy.color(generate_colours())
+#     # movement = random.randint(10,50)
+#     # angles = [90, 180, 270, 360]
+#     angles = range(0,360)
+#     heading = random.choice(angles)
+#     timmy.setheading(heading)
+#     timmy.hideturtle()
+#     timmy.forward(distance)
+
+# for i in range(300):
+#     random_walk(5)
+
+
+# timmy.color(generate_colours())
+# timmy.circle(100)
+
+x = ((-200,200), (200,200), (200, -200), (-200, -200), (0,0))
+for i in x:
+    timmy.penup()
+    timmy.setposition(i)
+    timmy.pendown()
+    for i in range(0,360,10):
+        timmy.speed("fastest")
+        timmy.color(generate_colours())
+        timmy.circle(100)
+        timmy.setheading(i)
+
+
+
+# ### circle spirograph 
+# def spiro(distance):
+#     timmy.speed("fastest")
+#     timmy.color(generate_colours())
+#     # movement = random.randint(10,50)
+#     # angles = [90, 180, 270, 360]
+#     angles = range(0,360)
+#     heading = random.choice(angles)
+#     timmy.setheading(heading)
+#     timmy.hideturtle()
+#     timmy.forward(distance)
+
+# for i in range(300):
+#     spiro(5)
 
 # screen object 
 screen = Screen()
