@@ -77,7 +77,7 @@ for i in x:
     timmy.penup()
     timmy.setposition(i)
     timmy.pendown()
-    for i in range(0,360,10):
+    for i in range(0,360,1):
         timmy.speed("fastest")
         timmy.color(generate_colours())
         timmy.circle(100)
